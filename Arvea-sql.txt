@@ -1,0 +1,12 @@
+SELECT
+    p.name AS product_name,
+    pc.variant,
+    s.depot_id,
+    s.quantity,
+    CASE
+        WHEN s.quantity > 0 THEN 'true'
+        ELSE 'false'
+    END AS is_available
+FROM stock s
+JOIN product_configurations pc ON s.product_config_id = pc.id
+JOIN product p ON pc.product_id = p.id;
